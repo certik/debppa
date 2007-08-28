@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if header %}
+<h2>{{ header }}</h2>
+{% else %}
+<h2>Error</h2>
+{% endif %}
+<p>{{ text }}</p>
+{% endblock %}

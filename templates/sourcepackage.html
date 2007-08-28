@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if package %}
+    <h3>Source Package: {{ package.name }} ({{ package.version }})</h3>
+    <p>Status of this package: <strong>{{ package.status }}</strong></p>
+    <p>File: <code>{{ package.file_dsc }}</code></p>
+    {% if binary_packages %}
+    <p>These binary packages were built:</p>
+    <table>
+        <tr class="rowH">
+            <td>binary package</td>
+            <td>arch</td>
+            <td>short description</td>
+            <td>file</td>
+        </tr>
+        {% for p in binary_packages %}
+        <tr class="{% cycle rowA,rowB %}">
+            <td>{{ p.name }}</td>
+            <td>{{ p.arch }}</td>
+            <td>{{ p.short_description }}</td>
+            <td>{{ p.file_deb }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Build <a href="/ppa/buildlog/{{ package.name }}">log</a></p>
+    {% else %}
+    <h3>Building</h3>
+    <form action="/ppa/build/" method="post">
+        <input type="hidden" name="package" value="{{ package.id }}">
+    <p>
+        Build the package:
+        <input type="submit" value="Build">
+    </p>
+    </form>
+    {% endif %}
+    <h3>Other</h3>
+    <form action="/ppa/delete/" method="post">
+        <input type="hidden" name="package" value="{{ package.id }}">
+    <p>
+        Delete this source package permanently:
+        <input type="submit" value="Delete">
+    </p>
+    </form>
+    </form>
+{% else %}
+    <h3>Source Package</h3>
+    The package was not found in the database.
+{% endif %}
+{% endblock %}

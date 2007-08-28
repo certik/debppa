@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Packages</h2>
+<p>
+Append to your /etc/apt/sources.list:</p>
+<pre>
+deb file:/home/ondra/debian unstable main
+</pre><br/>
+<p>
+The archive is automatically updated. 
+(<a href="/ppa/sourceslist">Update</a> manually in case of inconsistency.)</p>
+
+<h3>Debian source packages</h3>
+{% if packages %}
+    <table>
+        <tr class="rowH">
+            <td>source package</td>
+            <td>version</td>
+            <td>status</td>
+        </tr>
+        {% for p in packages %}
+        <tr class="{% cycle rowA,rowB %}">
+            <td><a href="/ppa/sourcepackage/{{ p.name }}">{{ p.name }}</a></td>
+            <td>{{ p.version }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    No packages.
+{% endif %}
+{% endblock %}
