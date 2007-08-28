@@ -1,0 +1,26 @@
+Installation:
+-------------
+
+wajig install python-django
+
+Usage:
+------
+
+./manage.py runserver
+
+and point your browser to the address shown. You can also specify the port
+manually:
+
+./manage.py runserver 8080
+
+Database:
+---------
+
+The whole database is in the "database" file, no configuration is needed. You
+can backup this file and restore it later, it will work (no need to setup
+anything). If you delete it, you need to issue:
+
+./manage.py syncdb
+
+This will create a fresh new database file (and asks you to create a super user
+account, that is used in the admin interface).

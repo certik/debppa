@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Packages for import</h2>
+{% if newpackages %}
+    <table>
+        <tr class="rowH">
+            <td>dsc file</td>
+            <td>import</td>
+        </tr>
+        {% for p in newpackages %}
+        <tr class="{% cycle rowA,rowB %}">
+            <td>{{ p }}</td>
+            <td>
+                <form action="/ppa/import/" method="post">
+                    <input type="hidden" name="package" value="{{ p }}">
+                    <input type="submit" value="Import">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+<p>No packages found in "incoming" (see ppa/views.py for the exact path).</p>
+{% endif %}
+
+{% comment %}
+
+<h2>Upload</h2>
+<p>There are 4 steps you need to do in order to upload packages to DebPPA:
+<ul>
+<li>Create a new DepPPA account</li>
+<li>Register your OpenPGP key</li>
+<li>Create a source package</li>
+<li>Upload your package using dput</li>
+</ul></p><br/>
+<h3>Create a new DepPPA account</h3>
+<p>If you don't have an account yet, click the "sign in" link in the top right
+corner and follow the instructions.</p>
+<h3>Register your OpenPGP key</h3>
+<p>On your account page, click "OpenPGP keys" and register your key.</p>
+<h3>Create a source package</h3>
+<p>We suggest that you keep your debian dir in the svn repository. Then simply
+do:</p>
+<pre>
+svn-buildpackage -S -rfakeroot
+</pre><br/>
+<p>This will create the Debian source package, that consists of 3 files:
+<code>*.dsc</code>, <code>*.orig.tar.gz</code> and <code>*.diff.gz</code> (i.e.
+nothing will be compiled).</p>
+
+<h3>Upload your package using dput</h3>
+<p>Edit your <code>~/.dput.cf</code>:</p>
+{% comment %}
+<pre>
+[debppa]
+fqdn = www.debppa.org
+method = ftp
+incoming = incoming/
+login = anonymous
+{% xendcomment %}
+<pre>
+[debppa]
+fqdn = pc232.fzu.cz
+method = scp
+incoming = ~/incoming/
+login = ondra
+</pre><br/>
+
+<p>And upload your package using:</p>
+<pre>
+dput debppa *.dsc
+</pre><br/>
+<p>Substitute the path to your dsc file (that you generated in the previous
+step) for the <code>*.dsc</code>.</p>
+
+{% endcomment %}
+
+{% endblock %}

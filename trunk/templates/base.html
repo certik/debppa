@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+	Design by Free CSS Templates
+	http://www.freecsstemplates.org
+	Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Debian Personal Package Archive</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="/site_media/css/default.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="outer">
+	<div id="header">
+		<h1><a href="/">Debian PPA</a></h1>
+		<h2>by DebPPA team and Free CSS Templates</h2>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="/">Home</a></li>
+			<li><a href="/ppa/packages/">Packages</a></li>
+			<li><a href="/ppa/upload/">Upload</a></li>
+			<li><a href="/ppa/contact/">Contact</a></li>
+		</ul>
+	</div>
+	<div id="content">
+		<div id="tertiaryContent">
+			<h3>Other</h3>
+            <p>Links to similar and related services:</p>
+            <ul>
+                <li><a href="https://launchpad.net/ubuntu/+ppas">Ubuntu PPA</a></li>
+                <li><a href="http://mentors.debian.net/">Debian Mentors</a></li>
+                <li><a href="http://revu.tauware.de/">Ubuntu REVU</a></li>
+                <li><a href="http://debian.wgdd.de/debian/">debian.wgdd.de</a></li>
+            </ul>
+            <p>Template page with CSS styles and XHTML examples:
+            <a href="/ppa/temp/">temp.html</a></p>
+            <p>Admin site:
+            <a href="/admin/">admin</a></p>
+		</div>
+		<div id="primaryContentContainer">
+			<div id="primaryContent">
+                {% block content %}
+                {% endblock %}
+			</div>
+			<div class="xbg"></div>
+		</div>
+		<div id="secondaryContent">
+			<h3>News</h3>
+            <ul>
+                <li><strong>August 27, 2007:</strong><br/>
+                Implemented: Debian archive</li>
+                <li><strong>August 21, 2007:</strong><br/>
+                Implemented: importing, deleting, compiling</li>
+                <li><strong>August 12, 2007:</strong><br/>
+                Database created (SQLite)</li>
+                <li><strong>August 02, 2007:</strong><br/>
+                First testing version of DebPPA created</li>
+            </ul>
+			<div class="xbg"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+        <p>Copyright &copy; 2007 <a href="/ppa/contact">DebPPA</a> team. Powered by <a
+            href="http://www.djangoproject.com/">Django</a>. Designed by <a
+            href="http://www.freecsstemplates.org">Free CSS Templates</a>.</p>
+	</div>
+</div>
+</body>
+</html>

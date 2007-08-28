@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Welcome to Debian Personal Package Archive (DebPPA)</h2>
+<p><strong>DebPPA</strong> is the same as the Ubuntu PPA, but for Debian (see
+the links on the right hand side). It's in development with the aim of having
+the exact same functionality as Ubuntu PPA.</p>
+<h3>Why not to just use Debian unstable?</h3>
+<p>
+Because it's a slow process. Usually, when creating a new package, we need to improve/fix
+other packages that we depend on and we want to fix that immediatelly. So we
+simply upload all packages here, make them work and then we can use them on all
+our computers easily. Then we contribute them back to Debian unstable, which
+can take weeks or even months, because you need to convince the particular
+maintainer, that your patch is ok etc., or in the case of a new package, it
+takes a long time until it hits the unstable archive. 
+</p>
+<p>
+If you have a program, that you would like to have in Debian, create a package
+for it, upload it here, fix all problems with that (and other related
+packages), make sure it works perfectly for you on all your computers using
+apt-get and then use the Debian mentors (see the link on the right hand side)
+to contribute all your changes back to Debian.
+</p>
+{% endblock %}
