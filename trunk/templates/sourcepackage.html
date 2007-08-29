@@ -25,6 +25,9 @@
     </table>
     <p>Build <a href="/ppa/buildlog/{{ package.name }}">log</a></p>
     {% else %}
+    {% if package.build_log %}
+    <p>Build <a href="/ppa/buildlog/{{ package.name }}">log</a></p>
+    {% endif %}
     <h3>Building</h3>
     <form action="/ppa/build/" method="post">
         <input type="hidden" name="package" value="{{ package.id }}">
