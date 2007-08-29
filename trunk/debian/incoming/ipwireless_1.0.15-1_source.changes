@@ -1,0 +1,31 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.7
+Date: Sat, 23 Jun 2007 01:25:29 +0200
+Source: ipwireless
+Binary: ipwireless
+Architecture: source
+Version: 1.0.15-1
+Distribution: unstable
+Urgency: low
+Maintainer: Ondrej Certik <ondrej@certik.cz>
+Changed-By: Ondrej Certik <ondrej@certik.cz>
+Description: 
+ ipwireless - Kernel module for T-Mobile PCMCIA card
+Changes: 
+ ipwireless (1.0.15-1) unstable; urgency=low
+ .
+   * Initial release
+Files: 
+ 224482a0336cdb17c19162bef0f76ce4 612 net extra ipwireless_1.0.15-1.dsc
+ 8db734118f6fbed6e786b91b55d9793f 24138 net extra ipwireless_1.0.15.orig.tar.gz
+ 414328913345ff612419d39b26a80dd3 2272 net extra ipwireless_1.0.15-1.diff.gz
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFGw1zCKQ++Uu6gdgkRAho9AJ9nYQS0lCE2Lbxwbx0QuvdOXaOOaACfbbDo
+cRFf1DMuOtNctsB+t0BAcUQ=
+=Wo2+
+-----END PGP SIGNATURE-----
