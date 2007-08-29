@@ -12,7 +12,7 @@ def ppa_packages(request):
 def ppa_upload(request):
     packages = SourcePackage.objects.all()
     from glob import glob
-    newpackages = glob("/home/ondra/incoming/*.dsc")
+    newpackages = glob("debian/incoming/*.dsc")
     return render_to_response('upload.html', {"packages": packages,
         "newpackages": newpackages})
 
@@ -25,13 +25,13 @@ def ppa_buildlog(request, package_name):
 def ppa_import(request):
     package_dsc = request.POST["package"]
     path, package_name, version = parse_filename_dsc(package_dsc)
-    tar_gz = path+"/"+package_name+"_"+version+".tar.gz"
+    tar_gz = path+"/"+package_name+"_"+version[:version.find("-")]+".orig.tar.gz"
     if len(SourcePackage.objects.filter(name__exact=package_name)) != 0:
         return render_to_response('error.html', {"text": "The package with \
                 the name <strong>%s</strong> already exists." % package_name})
     p = SourcePackage(name=package_name)
     from os import system
-    archive = "/home/ondra/debian/unstable/"
+    archive = "debian/unstable/"
     system("cp %s %s" % (package_dsc, archive))
     p.file_dsc = archive+basename(package_dsc)
     system("cp %s %s" % (tar_gz, archive))
@@ -59,7 +59,7 @@ def package_built(c):
     p.build_log = c.log
     p.status = "built"
     from os import system
-    archive = "/home/ondra/debian/unstable/"
+    archive = "debian/unstable/"
     for oldpath in c.packages:
         dir,pname,version,arch = parse_filename_deb(oldpath)
         system("mv %s %s" % (oldpath, archive))
@@ -160,11 +160,11 @@ def post_data(request):
 def update_sources_list():
     from pexpect import run
     from os import system
-    system("cd /home/ondra/debian; dpkg-scanpackages unstable /dev/null > /tmp/Packages")
+    system("cd debian; dpkg-scanpackages unstable /dev/null > /tmp/Packages")
     print run("gzip /tmp/Packages")
-    print run("rm -rf /home/ondra/debian/dists/")
-    print run("mkdir -p /home/ondra/debian/dists/unstable/main/binary-i386/")
-    print run("mv /tmp/Packages.gz /home/ondra/debian/dists/unstable/main/binary-i386/")
+    print run("rm -rf debian/dists/")
+    print run("mkdir -p debian/dists/unstable/main/binary-i386/")
+    print run("mv /tmp/Packages.gz debian/dists/unstable/main/binary-i386/")
 
 def ppa_sourceslist(request):
     update_sources_list()
