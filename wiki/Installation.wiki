@@ -1,9 +1,9 @@
 #summary Installation instructions
 #labels Featured
 
-Install django
+Install prerequisites
 {{{
-apt-get install python-django
+apt-get install python-django python-pysqlite2
 }}}
 and
 {{{
