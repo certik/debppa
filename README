@@ -1,7 +1,7 @@
 Installation:
 -------------
 
-wajig install python-django
+wajig install python-django python-pysqlite2
 
 Usage:
 ------

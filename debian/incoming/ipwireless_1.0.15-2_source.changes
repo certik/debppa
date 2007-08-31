@@ -1,0 +1,19 @@
+Format: 1.7
+Date: Fri, 31 Aug 2007 02:03:27 +0200
+Source: ipwireless
+Binary: ipwireless
+Architecture: source
+Version: 1.0.15-2
+Distribution: unstable
+Urgency: low
+Maintainer: Ondrej Certik <ondrej@certik.cz>
+Changed-By: Ondrej Certik <ondrej@certik.cz>
+Description: 
+ ipwireless - Kernel module for T-Mobile PCMCIA card
+Changes: 
+ ipwireless (1.0.15-2) unstable; urgency=low
+ .
+   * Use the 2.6.22 kernel
+Files: 
+ 2bcc316f42ee780563dbed466f67547c 375 net extra ipwireless_1.0.15-2.dsc
+ 951ccae360a3ee52148a913ff110978e 2314 net extra ipwireless_1.0.15-2.diff.gz
