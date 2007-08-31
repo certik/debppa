@@ -36,6 +36,16 @@
         <input type="submit" value="Build">
     </p>
     </form>
+    In order the build to work, the user running this webserver needs to 
+    be able to issue
+    <pre>
+    sudo cowbuilder --build package.dsc
+    </pre>
+    so do by hand in a terminal
+    <pre>
+    sudo cowbuilder --create
+    sudo cowbuilder --update
+    </pre>
     {% endif %}
     <h3>Other</h3>
     <form action="/ppa/delete/" method="post">
