@@ -7,7 +7,10 @@ from os.path import basename
 
 def ppa_packages(request):
     packages = SourcePackage.objects.all()
-    return render_to_response('packages.html', {"packages": packages})
+    from os import getcwd
+    path = getcwd() + "/debian"
+    return render_to_response('packages.html', {"packages": packages,
+        "archive_path": path})
 
 def ppa_upload(request):
     packages = SourcePackage.objects.all()
@@ -23,9 +26,18 @@ def ppa_buildlog(request, package_name):
         "<pre>"+log+"</pre>", "header":"Build log"})
 
 def ppa_import(request):
+    from os.path import exists
     package_dsc = request.POST["package"]
     path, package_name, version = parse_filename_dsc(package_dsc)
-    tar_gz = path+"/"+package_name+"_"+version[:version.find("-")]+".orig.tar.gz"
+    if version.find("-") >= 0:
+        strip_version = version[:version.find("-")]
+    else:
+        strip_version = version
+    tar_gz = path+"/"+package_name+"_"+strip_version+".orig.tar.gz"
+    if not exists(tar_gz):
+        tar_gz = path+"/"+package_name+"_"+strip_version+".tar.gz"
+    if not exists(tar_gz):
+        tar_gz = ""
     if len(SourcePackage.objects.filter(name__exact=package_name)) != 0:
         return render_to_response('error.html', {"text": "The package with \
                 the name <strong>%s</strong> already exists." % package_name})
@@ -34,8 +46,11 @@ def ppa_import(request):
     archive = "debian/unstable/"
     system("cp %s %s" % (package_dsc, archive))
     p.file_dsc = archive+basename(package_dsc)
-    system("cp %s %s" % (tar_gz, archive))
-    p.file_tar_gz = archive+basename(tar_gz)
+    if tar_gz != "":
+        system("cp %s %s" % (tar_gz, archive))
+        p.file_tar_gz = archive+basename(tar_gz)
+    else:
+        p.file_tar_gz = ""
     p.version = version
     p.status = "unbuilt"
     p.save()
@@ -47,7 +62,8 @@ def ppa_delete(request):
     binary_packages = p.binarypackage_set.all()
     from os import system
     system("rm %s" % (p.file_dsc))
-    system("rm %s" % (p.file_tar_gz))
+    if p.file_tar_gz != "":
+        system("rm %s" % (p.file_tar_gz))
     for bin in binary_packages:
         system("rm %s" % (bin.file_deb))
     p.delete()
