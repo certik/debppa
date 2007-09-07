@@ -30,6 +30,14 @@ def parse_filename_deb(file_deb):
     assert dir+"/"+file+"_"+version+"_"+arch+".deb" == file_deb
     return dir, file, version, arch
 
+def execute(command):
+    """Runs the "command", returns all output. Needs to be very robust."""
+    import pexpect
+    #log = pexpect.run(command)
+    pexpect.run('bash -c "%s &> /tmp/log"' % command)
+    log = "".join(open("/tmp/log").readlines())
+    return log
+
 class cowbuilder(Thread):
     """
     Builds a package in a new thread.
@@ -56,16 +64,15 @@ class cowbuilder(Thread):
         self.callback = callback
 
     def run(self):
-        import pexpect
         from glob import glob
-        pexpect.run("rm -rf /tmp/s")
-        pexpect.run("mkdir /tmp/s")
+        execute("rm -rf /tmp/s")
+        execute("mkdir /tmp/s")
         self.output_dir = "/tmp/s"
         command = "sudo cowbuilder --build %s --buildresult %s" % \
             ( self.package_dsc, self.output_dir )
         log = "$ "+command+"\n"
         print "There is going to be an exception now, don't know why..."
-        log += pexpect.run(command)
+        log += execute(command)
         print "the exception should be above ^^^"
         self.log = log
         self.packages = glob("/tmp/s/*.deb")
