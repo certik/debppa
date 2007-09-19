@@ -6,5 +6,12 @@ Please follow the links in my initial [http://groups.google.com/group/debppa-dev
 
 See the Installation wiki page (on the right panel) for documentation.
 
+I am currently working on:
+
+http://wiki.debian.org/svnbuildstat
+
+and I will merge debppa with svnbuildstat. This will provide the service we need and much more. Please, join us as well.
+
 
 Please report all bugs (into the [http://code.google.com/p/debppa/issues/list Issues], or to the [http://groups.google.com/group/debppa-devel mailinglist]).
+ 
